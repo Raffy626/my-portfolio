@@ -1,0 +1,10 @@
+body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:0;background:#f7f7f8;color:#111}
+.nav{display:flex;gap:16px;padding:12px 24px;background:#0f172a;color:white}
+.nav a{color:#fff;text-decoration:none}
+.container{padding:24px;max-width:1000px;margin:0 auto}
+.card{background:white;padding:16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.06);margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.btn{padding:8px 12px;border-radius:6px;border:none;cursor:pointer}
+.form-group{margin-bottom:12px}
+input,textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #ddd}
+small{color:#666}
