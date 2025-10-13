@@ -23,7 +23,7 @@ export default function PortfolioList() {
       className="px-6 py-16 bg-grid text-white relative overflow-hidden"
     >
       <motion.h1
-        className="text-4xl md:text-5xl font-extrabold mb-12 text-center bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent"
+        className="text-4xl md:text-5xl font-extrabold mb-12 text-center text-white"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
