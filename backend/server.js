@@ -17,7 +17,6 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/auth", authRoutes);
 app.use("/api/portfolios", portfolioRoutes);
 
-// Tambahkan route untuk /api
 app.get("/api", (req, res) => {
   res.json({ message: "API is working!" });
 });
