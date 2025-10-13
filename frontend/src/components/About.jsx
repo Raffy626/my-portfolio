@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 export default function About() {
+  const parallaxRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (parallaxRef.current) {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.3;
+        parallaxRef.current.style.transform = `translateY(${rate}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="bg-gray-900 py-24 sm:py-32">
-      <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+    <div className="relative bg-gray-900 py-24 sm:py-32 overflow-hidden">
+      {/* Parallax Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div
+          ref={parallaxRef}
+          className="absolute top-0 left-0 w-full h-full opacity-10"
+        >
+          {/* Floating geometric shapes */}
+          <div className="absolute top-20 left-10 w-32 h-32 bg-indigo-500/30 rounded-full blur-xl animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-purple-500/30 rounded-full blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-40 left-1/4 w-40 h-40 bg-blue-500/30 rounded-full blur-xl animate-pulse delay-500"></div>
+          <div className="absolute bottom-20 right-10 w-28 h-28 bg-pink-500/30 rounded-full blur-xl animate-pulse delay-1500"></div>
+
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]"></div>
+        </div>
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-center text-base/7 font-semibold text-indigo-400">About Me</h2>
         <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
           Passionate UI/UX Designer & Mobile Developer
