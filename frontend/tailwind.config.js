@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'], // font modern
+        sans: ['Inter', 'sans-serif'],
       },
       colors: {
         dark: "#0f0f0f",
