@@ -2,30 +2,97 @@ import React from "react";
 
 export default function About() {
   return (
-    <section id="about" className="py-20 px-6 bg-gray-900">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 items-center gap-12">
-        <div data-aos="fade-right" className="flex justify-center">
-          <img
-            src="/profileporto.jpeg"
-            alt="Raffy Reshaina Pasha"
-            className="w-72 h-73 object-cover rounded-2xl shadow-lg border-4 border-indigo-500"
-          />
-        </div>
-        <div data-aos="fade-left" className="text-left">
-          <h2 className="text-3xl font-bold mb-4">About Me</h2>
-          <p className="text-gray-400 leading-relaxed mb-6">
-            Hi, my name is <span className="text-indigo-400">Raffy Reshaina Pasha</span>, a passionate and motivated UI/UX Designer and Mobile Developer with hands-on experience during my internship. I focus on designing user-centered interfaces and developing mobile applications that combine functionality, usability, and visual appeal.
-          </p>
-
-          <p className="text-gray-400 leading-relaxed mb-6">
-            I enjoy turning ideas into seamless digital experiences by blending creativity with problem-solving skills. As a designer, I strive to create intuitive and engaging interfaces, while as a developer, I aim to build responsive and efficient mobile applications that meet user needs.
-          </p>
-
-          <p className="text-gray-400 leading-relaxed">
-            During my internship, I have strengthened my skills in collaboration, adaptability, and attention to detail, while contributing to real projects that deliver meaningful impact. I am eager to continue learning and growing in this field, and to bring value through innovative digital solutions.
-          </p>
+    <div className="bg-gray-900 py-24 sm:py-32">
+      <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+        <h2 className="text-center text-base/7 font-semibold text-indigo-400">About Me</h2>
+        <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
+          Passionate UI/UX Designer & Mobile Developer
+        </p>
+        <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
+          <div className="relative lg:row-span-2">
+            <div className="absolute inset-px rounded-lg bg-gray-800 lg:rounded-l-4xl" />
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+              <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
+                <p className="mt-2 text-lg font-medium tracking-tight text-white max-lg:text-center">Raffy Reshaina Pasha</p>
+                <p className="mt-2 max-w-lg text-sm/6 text-gray-400 max-lg:text-center">
+                  Hi, I'm Raffy, a passionate UI/UX Designer and Mobile Developer with hands-on experience from my internship.
+                </p>
+              </div>
+              <div className="flex-1 flex items-center justify-center p-4">
+                <img
+                  alt="Raffy Reshaina Pasha"
+                  src="/profileporto.jpeg"
+                  className="w-full max-w-xs h-auto rounded-lg object-cover"
+                />
+              </div>
+            </div>
+            <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/15 lg:rounded-l-4xl" />
+          </div>
+          <div className="relative max-lg:row-start-1">
+            <div className="absolute inset-px rounded-lg bg-gray-800 max-lg:rounded-t-4xl" />
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
+              <div className="px-8 pt-8 sm:px-10 sm:pt-10">
+                <p className="mt-2 text-lg font-medium tracking-tight text-white max-lg:text-center">UI/UX Design</p>
+                <p className="mt-2 max-w-lg text-sm/6 text-gray-400 max-lg:text-center">
+                  I focus on designing user-centered interfaces that combine functionality, usability, and visual appeal.
+                </p>
+              </div>
+              <div className="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
+                <img
+                  alt="UI/UX Design"
+                  src="https://tailwindcss.com/plus-assets/img/component-images/dark-bento-03-performance.png"
+                  className="w-full max-lg:max-w-xs"
+                />
+              </div>
+            </div>
+            <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/15 max-lg:rounded-t-4xl" />
+          </div>
+          <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
+            <div className="absolute inset-px rounded-lg bg-gray-800" />
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
+              <div className="px-8 pt-8 sm:px-10 sm:pt-10">
+                <p className="mt-2 text-lg font-medium tracking-tight text-white max-lg:text-center">Mobile Development</p>
+                <p className="mt-2 max-w-lg text-sm/6 text-gray-400 max-lg:text-center">
+                  I build responsive and efficient mobile applications that meet user needs and deliver meaningful impact.
+                </p>
+              </div>
+              <div className="@container flex flex-1 items-center max-lg:py-6 lg:pb-2">
+                <img
+                  alt="Mobile Development"
+                  src="https://tailwindcss.com/plus-assets/img/component-images/dark-bento-03-security.png"
+                  className="h-[min(152px,40cqw)] object-cover"
+                />
+              </div>
+            </div>
+            <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/15" />
+          </div>
+          <div className="relative lg:row-span-2">
+            <div className="absolute inset-px rounded-lg bg-gray-800 max-lg:rounded-b-4xl lg:rounded-r-4xl" />
+            <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
+              <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
+                <p className="mt-2 text-lg font-medium tracking-tight text-white max-lg:text-center">Internship Experience</p>
+                <p className="mt-2 max-w-lg text-sm/6 text-gray-400 max-lg:text-center">
+                  During my internship, I strengthened skills in collaboration, adaptability, and attention to detail.
+                </p>
+              </div>
+              <div className="relative min-h-120 w-full grow">
+                <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-tl-xl bg-gray-900/60 outline outline-white/10">
+                  <div className="flex bg-gray-900 outline outline-white/5">
+                    <div className="-mb-px flex text-sm/6 font-medium text-gray-400">
+                      <div className="border-r border-b border-r-white/10 border-b-white/20 bg-white/5 px-4 py-2 text-white">
+                        Portfolio.jsx
+                      </div>
+                      <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
+                    </div>
+                  </div>
+                  <div className="px-6 pt-6 pb-14">Lorem ipsum</div>
+                </div>
+              </div>
+            </div>
+            <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/15 max-lg:rounded-b-4xl lg:rounded-r-4xl" />
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

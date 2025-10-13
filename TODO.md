@@ -1,15 +1,13 @@
-# Replace alert() with SweetAlert2
+# TODO: Adapt About Component to Bento Grid Layout
 
-## Files to Update:
-- [x] frontend/src/pages/admin.jsx
-- [x] frontend/src/pages/AdminLogin.jsx
-- [x] frontend/src/pages/Login.jsx
-- [x] frontend/src/components/Contact.jsx
+## Tasks
+- [x] Update About.jsx with Bento grid structure
+- [x] Replace content with About Me sections (e.g., UI/UX Design, Mobile Development, Internship Experience)
+- [x] Keep the face image (/profileporto.jpeg) in the prominent left card
+- [x] Adapt headings and descriptions to user's profile
+- [x] Test the component in the browser (dev server running on http://localhost:5174/)
 
-## Steps:
-1. Add import Swal from 'sweetalert2'; to each file.
-2. Replace alert() calls with Swal.fire() for better UX.
-   - Success messages: Swal.fire({ title: "Success", text: "message", icon: "success" });
-   - Error messages: Swal.fire({ title: "Error", text: "message", icon: "error" });
-   - Info messages: Swal.fire({ title: "Info", text: "message", icon: "info" });
-3. Test the changes to ensure alerts work properly.
+## Notes
+- Ensure the layout is responsive and matches the original Bento grid design
+- Use Tailwind classes for styling
+- Keep the image path as /profileporto.jpeg
