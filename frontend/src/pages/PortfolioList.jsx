@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import axios from "axios";
 
 export default function PortfolioList() {
@@ -19,49 +20,68 @@ export default function PortfolioList() {
   return (
     <section
       id="portfolio"
-      className="px-6 py-12 bg-gray-950 text-white transition-all duration-500 ease-in-out"
+      className="px-6 py-16 bg-grid text-white relative overflow-hidden"
     >
-      <h1
-        className="text-3xl font-bold mb-10 text-center"
-        data-aos="zoom-in"
+      <motion.h1
+        className="text-4xl md:text-5xl font-extrabold mb-12 text-center bg-gradient-to-r from-indigo-400 to-purple-500 bg-clip-text text-transparent"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
       >
-        My Project
-      </h1>
+        My Projects
+      </motion.h1>
 
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-500 ease-in-out"
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
       >
-        {portfolios.map((p) => (
-          <div
+        {portfolios.map((p, index) => (
+          <motion.div
             key={p._id}
-            className="rounded-2xl overflow-hidden shadow-lg bg-gray-800 hover:shadow-2xl transition duration-300"
-            data-aos="zoom-in-up"
+            className="group relative rounded-3xl overflow-hidden bg-white/10 backdrop-blur-lg border border-white/20 shadow-2xl hover:shadow-indigo-500/25 transition-all duration-500 hover:scale-105"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1, duration: 0.6 }}
+            whileHover={{ y: -10 }}
           >
+            {/* Overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-indigo-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+
             {/* Gambar */}
-            <img
-              src={`http://localhost:5000${p.image}`}
-              alt={p.title}
-              className="w-full h-56 object-cover scale-100 hover:scale-105 transition-transform duration-300"
-            />
+            <div className="relative overflow-hidden">
+              <img
+                src={`http://localhost:5000${p.image}`}
+                alt={p.title}
+                className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500"></div>
+            </div>
 
             {/* Teks di bawah gambar */}
-            <div className="p-5 text-center">
-              <h3 className="text-xl font-semibold mb-2 text-indigo-400">
+            <div className="p-6 text-center relative z-20">
+              <h3 className="text-2xl font-bold mb-3 text-indigo-300 group-hover:text-indigo-200 transition-colors duration-300">
                 {p.title}
               </h3>
-              <p className="text-gray-300 text-sm mb-4">{p.description}</p>
-              <a
+              <p className="text-gray-300 text-base mb-6 leading-relaxed">{p.description}</p>
+              <motion.a
                 href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg text-white transition"
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-full text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Lihat Detail →
-              </a>
+                View Details
+                <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }
