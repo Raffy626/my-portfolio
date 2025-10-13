@@ -6,13 +6,21 @@ export default function Hero() {
   const [displayText, setDisplayText] = useState("");
 
   useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayText(fullText.slice(0, i + 1));
-      i++;
-      if (i === fullText.length) clearInterval(interval);
-    }, 250);
-    return () => clearInterval(interval);
+    const typeText = () => {
+      let i = 0;
+      const interval = setInterval(() => {
+        setDisplayText(fullText.slice(0, i + 1));
+        i++;
+        if (i === fullText.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            setDisplayText("");
+            typeText();
+          }, 8000);
+        }
+      }, 250);
+    };
+    typeText();
   }, []);
 
   return (
