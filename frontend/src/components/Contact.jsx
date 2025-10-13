@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import Swal from 'sweetalert2';
 
 export default function Contact() {
   const form = useRef();
@@ -16,12 +17,20 @@ export default function Contact() {
       )
       .then(
         () => {
-          alert("✅ Pesan berhasil dikirim!");
+          Swal.fire({
+            title: "Success",
+            text: "Pesan berhasil dikirim!",
+            icon: "success",
+          });
           form.current.reset();
         },
         (error) => {
           console.error("Email Error:", error.text);
-          alert("❌ Gagal mengirim pesan. Coba lagi.");
+          Swal.fire({
+            title: "Error",
+            text: "Gagal mengirim pesan. Coba lagi.",
+            icon: "error",
+          });
         }
       );
   };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import Swal from 'sweetalert2';
 
 export default function Admin() {
   const [portfolios, setPortfolios] = useState([]);
@@ -54,12 +55,20 @@ export default function Admin() {
           formData,
           { headers: { "Content-Type": "multipart/form-data" } }
         );
-        alert("✅ Portfolio updated!");
+        Swal.fire({
+          title: "Success",
+          text: "Portfolio updated!",
+          icon: "success",
+        });
       } else {
         await axios.post("http://localhost:5000/api/portfolios", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-        alert("✅ Portfolio added!");
+        Swal.fire({
+          title: "Success",
+          text: "Portfolio added!",
+          icon: "success",
+        });
       }
 
       setForm({ title: "", description: "", image: null, link: "" });
@@ -67,7 +76,11 @@ export default function Admin() {
       fetchPortfolios();
     } catch (err) {
       console.error("Error submit:", err.response?.data || err.message);
-      alert("❌ Gagal menambahkan/mengupdate portfolio");
+      Swal.fire({
+        title: "Error",
+        text: "Gagal menambahkan/mengupdate portfolio",
+        icon: "error",
+      });
     }
   };
 
@@ -84,15 +97,34 @@ export default function Admin() {
 
   // Delete
   const handleDelete = async (id) => {
-    if (!window.confirm("Yakin mau hapus portfolio ini?")) return;
-    try {
-      await axios.delete(`http://localhost:5000/api/portfolios/${id}`);
-      alert("🗑️ Portfolio deleted!");
-      fetchPortfolios();
-    } catch (err) {
-      console.error("Error delete:", err);
-      alert("❌ Gagal menghapus portfolio");
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await axios.delete(`http://localhost:5000/api/portfolios/${id}`);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your portfolio has been deleted.",
+            icon: "success"
+          });
+          fetchPortfolios();
+        } catch (err) {
+          console.error("Error delete:", err);
+          Swal.fire({
+            title: "Error",
+            text: "Gagal menghapus portfolio",
+            icon: "error",
+          });
+        }
+      }
+    });
   };
 
   // 🔹 Handle Logout
@@ -109,7 +141,11 @@ export default function Admin() {
     }
 
     localStorage.removeItem("token");
-    alert("👋 Logout berhasil!");
+    Swal.fire({
+      title: "Success",
+      text: "Logout berhasil!",
+      icon: "success",
+    });
     navigate("/login");
   };
 

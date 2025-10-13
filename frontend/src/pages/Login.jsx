@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import Swal from 'sweetalert2';
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -24,11 +25,19 @@ export default function Login() {
         localStorage.setItem("token", data.token);
         navigate("/admin");
       } else {
-        alert(data.message || "Login gagal");
+        Swal.fire({
+          title: "Error",
+          text: data.message || "Login gagal",
+          icon: "error",
+        });
       }
     } catch (err) {
       console.error("Error login:", err);
-      alert("Terjadi error saat login");
+      Swal.fire({
+        title: "Error",
+        text: "Terjadi error saat login",
+        icon: "error",
+      });
     }
   };
 

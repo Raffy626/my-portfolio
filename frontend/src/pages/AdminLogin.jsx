@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { login } from "../api";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
 
 export default function AdminLogin(){
   const [email,setEmail]=useState("");
@@ -15,10 +16,18 @@ export default function AdminLogin(){
         localStorage.setItem("token", res.token);
         nav("/admin/dashboard");
       } else {
-        alert(res.message||"Login failed");
+        Swal.fire({
+          title: "Error",
+          text: res.message || "Login failed",
+          icon: "error",
+        });
       }
     } catch(err){
-      alert("Login error");
+      Swal.fire({
+        title: "Error",
+        text: "Login error",
+        icon: "error",
+      });
     }
   }
 
