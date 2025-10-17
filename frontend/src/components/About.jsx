@@ -17,7 +17,7 @@ export default function About() {
   }, []);
 
   return (
-    <div className="relative bg-gray-900 py-24 sm:py-32 overflow-hidden">
+    <div className="relative bg-gray-900 py-24 sm:py-32 overflow-hidden" data-aos="fade-in">
       {/* Parallax Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div
@@ -36,12 +36,12 @@ export default function About() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="text-center text-base/7 font-semibold text-indigo-400">About Me</h2>
-        <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl">
+        <h2 className="text-center text-base/7 font-semibold text-indigo-400" data-aos="fade-up">About Me</h2>
+        <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-white sm:text-5xl" data-aos="fade-up" data-aos-delay="100">
           Passionate UI/UX Designer & Mobile Developer
         </p>
-        <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
-          <div className="relative lg:row-span-2">
+        <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2" data-aos="fade-up" data-aos-delay="200">
+          <div className="relative lg:row-span-2" data-aos="zoom-in" data-aos-delay="300">
             <div className="absolute inset-px rounded-lg bg-gray-800 lg:rounded-l-4xl" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
               <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
@@ -60,7 +60,7 @@ export default function About() {
             </div>
             <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/15 lg:rounded-l-4xl" />
           </div>
-          <div className="relative max-lg:row-start-1">
+          <div className="relative max-lg:row-start-1" data-aos="fade-right" data-aos-delay="400">
             <div className="absolute inset-px rounded-lg bg-gray-800 max-lg:rounded-t-4xl" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
               <div className="px-8 pt-8 sm:px-10 sm:pt-10">
@@ -79,7 +79,7 @@ export default function About() {
             </div>
             <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/15 max-lg:rounded-t-4xl" />
           </div>
-          <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
+          <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2" data-aos="fade-left" data-aos-delay="500">
             <div className="absolute inset-px rounded-lg bg-gray-800" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
               <div className="px-8 pt-8 sm:px-10 sm:pt-10">
@@ -98,7 +98,7 @@ export default function About() {
             </div>
             <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm outline outline-white/15" />
           </div>
-          <div className="relative lg:row-span-2">
+          <div className="relative lg:row-span-2" data-aos="zoom-in" data-aos-delay="600">
             <div className="absolute inset-px rounded-lg bg-gray-800 max-lg:rounded-b-4xl lg:rounded-r-4xl" />
             <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
               <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">

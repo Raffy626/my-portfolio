@@ -36,12 +36,14 @@ export default function Hero() {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1 }}
+        data-aos="zoom-in"
       />
       <motion.h1
         className="mt-6 text-4xl md:text-6xl font-bold text-white"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
+        data-aos="fade-up"
       >
         {displayText}
         <span className="animate-pulse">|</span>
@@ -52,6 +54,8 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5, duration: 1 }}
+        data-aos="fade-up"
+        data-aos-delay="200"
       >
         UI/UX Designer & Mobile Developer
       </motion.p>
@@ -61,6 +65,8 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
+        data-aos="fade-up"
+        data-aos-delay="400"
       >
         <a
           href="#portfolio"

@@ -13,12 +13,13 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-20 px-6 bg-gray-950 text-white relative overflow-hidden">
+    <section id="skills" className="py-20 px-6 bg-gray-950 text-white relative overflow-hidden" data-aos="fade-in">
       <motion.h2
         className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-white"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        data-aos="fade-up"
       >
         My Skills
       </motion.h2>
@@ -28,6 +29,8 @@ export default function Skills() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3, duration: 0.8 }}
+        data-aos="fade-up"
+        data-aos-delay="200"
       >
         {skills.map((skill, index) => (
           <motion.div
@@ -37,6 +40,8 @@ export default function Skills() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.6 }}
             whileHover={{ y: -10 }}
+            data-aos="zoom-in"
+            data-aos-delay={300 + index * 100}
           >
             {/* Overlay on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-indigo-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl z-10"></div>

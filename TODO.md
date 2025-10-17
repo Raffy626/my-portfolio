@@ -1,7 +1,9 @@
-# About Component Parallax Enhancement Tasks
+# TODO for Admin Page Redesign
 
-- [x] Add parallax scrolling effect to the About section.
-- [x] Implement background elements that move at different speeds.
-- [x] Add floating geometric shapes or particles for depth.
-- [x] Ensure parallax works smoothly on scroll.
-- [x] Maintain responsive design and performance.
+- [x] Redesign admin.jsx with dark theme consistent with the app
+- [x] Use modern UI components with Tailwind CSS
+- [x] Improve form layout and styling
+- [x] Enhance portfolio list display with cards
+- [x] Add animations and hover effects
+- [x] Ensure responsive design
+- [x] Test all functionalities (add, edit, delete, logout)
