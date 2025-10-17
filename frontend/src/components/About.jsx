@@ -18,19 +18,16 @@ export default function About() {
 
   return (
     <div className="relative bg-gray-900 py-24 sm:py-32 overflow-hidden" data-aos="fade-in">
-      {/* Parallax Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div
           ref={parallaxRef}
           className="absolute top-0 left-0 w-full h-full opacity-10"
         >
-          {/* Floating geometric shapes */}
           <div className="absolute top-20 left-10 w-32 h-32 bg-indigo-500/30 rounded-full blur-xl animate-pulse"></div>
           <div className="absolute top-40 right-20 w-24 h-24 bg-purple-500/30 rounded-full blur-xl animate-pulse delay-1000"></div>
           <div className="absolute bottom-40 left-1/4 w-40 h-40 bg-blue-500/30 rounded-full blur-xl animate-pulse delay-500"></div>
           <div className="absolute bottom-20 right-10 w-28 h-28 bg-pink-500/30 rounded-full blur-xl animate-pulse delay-1500"></div>
 
-          {/* Grid pattern overlay */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]"></div>
         </div>
       </div>
@@ -117,7 +114,7 @@ export default function About() {
                       <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
                     </div>
                   </div>
-                  <div className="px-6 pt-6 pb-14">Lorem ipsum</div>
+                  <div className="px-6 pt-6 pb-14">console.log("hi")</div>
                 </div>
               </div>
             </div>
