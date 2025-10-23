@@ -10,5 +10,8 @@
       "src": "/(.*)",
       "dest": "api/index.js"
     }
-  ]
+  ],
+  "buildCommand": "npm install",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install"
 }
