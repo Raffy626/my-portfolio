@@ -7,7 +7,7 @@ import Skills from "./components/Skills";
 import PortfolioList from "./pages/PortfolioList";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import Admin from "./pages/Admin";
+import Admin from "./pages/admin";
 import Login from "./pages/Login";
 import AOS from "aos";
 import "aos/dist/aos.css";
