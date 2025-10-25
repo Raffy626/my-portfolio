@@ -16,4 +16,32 @@ api.interceptors.request.use((config) => {
 
 export { API_BASE as API_BASE_URL, IMAGE_BASE };
 
+export const fetchAboutMe = async () => {
+  const response = await api.get("/aboutme");
+  return response.data;
+};
+
+export const createAboutMe = async (data) => {
+  const response = await api.post("/aboutme", data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
+
+export const updateAboutMe = async (id, data) => {
+  const response = await api.put(`/aboutme/${id}`, data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
+
+export const deleteAboutMe = async (id) => {
+  const response = await api.delete(`/aboutme/${id}`);
+  return response.data;
+};
+
 export default api;

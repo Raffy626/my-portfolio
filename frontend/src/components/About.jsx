@@ -1,7 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { fetchAboutMe } from "../api";
 
 export default function About() {
   const parallaxRef = useRef(null);
+  const [aboutData, setAboutData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadAboutData = async () => {
+      try {
+        const data = await fetchAboutMe();
+        if (data.length > 0) {
+          setAboutData(data[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching about data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadAboutData();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +35,22 @@ export default function About() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  if (loading) {
+    return (
+      <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black py-24 sm:py-32 overflow-hidden">
+        <div className="text-center text-white">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!aboutData) {
+    return (
+      <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black py-24 sm:py-32 overflow-hidden">
+        <div className="text-center text-white">No about data available</div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black py-24 sm:py-32 overflow-hidden" data-aos="fade-in">
@@ -49,18 +85,21 @@ export default function About() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-xl font-semibold text-white">Raffy Reshaina Pasha</h3>
-                    <p className="text-sm text-indigo-400">UI/UX Designer & Mobile Developer</p>
+                    <h3 className="text-xl font-semibold text-white">{aboutData.name}</h3>
+                    <p className="text-sm text-indigo-400">{aboutData.title}</p>
                   </div>
                 </div>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  Hi, I'm Raffy, a passionate UI/UX Designer and Mobile Developer with hands-on experience from my internship.
+                  {aboutData.description}
                 </p>
                 <div className="flex justify-center">
                   <img
-                    alt="Raffy Reshaina Pasha"
-                    src="/profileporto.jpeg"
+                    alt={aboutData.name}
+                    src={aboutData.image ? `http://localhost:5000${aboutData.image}` : "/profile.jpeg"}
                     className="w-32 h-32 rounded-full object-cover border-4 border-indigo-500/30 shadow-lg"
+                    onError={(e) => {
+                      e.target.src = "/profile.jpeg";
+                    }}
                   />
                 </div>
               </div>
@@ -81,7 +120,7 @@ export default function About() {
                   <h3 className="text-xl font-semibold text-white">UI/UX Design</h3>
                 </div>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  I focus on designing user-centered interfaces that combine functionality, usability, and visual appeal.
+                  {aboutData.uiuxDescription}
                 </p>
                 <div className="flex justify-center">
                   <img
@@ -109,7 +148,7 @@ export default function About() {
                   <h3 className="text-xl font-semibold text-white">Mobile Development</h3>
                 </div>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  I build responsive and efficient mobile applications that meet user needs and deliver meaningful impact.
+                  {aboutData.mobileDescription}
                 </p>
                 <div className="flex justify-center">
                   <img
@@ -136,7 +175,7 @@ export default function About() {
                   <h3 className="text-xl font-semibold text-white">Internship Experience</h3>
                 </div>
                 <p className="text-gray-300 mb-6 leading-relaxed">
-                  During my internship, I strengthened skills in collaboration, adaptability, and attention to detail.
+                  {aboutData.internshipDescription}
                 </p>
                 <div className="bg-gray-900/50 rounded-lg p-4 border border-gray-700/50">
                   <div className="flex items-center mb-2">
