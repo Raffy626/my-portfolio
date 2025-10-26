@@ -8,6 +8,7 @@ import cors from "cors";
 import portfolioRoutes from "./routes/portfolios.js";
 import authRoutes from "./routes/auth.js";
 import aboutMeRoutes from "./routes/aboutMe.js";
+import skillRoutes from "./routes/skills.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/auth", authRoutes);
 app.use("/api/portfolios", portfolioRoutes);
 app.use("/api/aboutme", aboutMeRoutes);
+app.use("/api/skills", skillRoutes);
 
 app.get("/api", (req, res) => {
   res.json({ message: "API is working!" });

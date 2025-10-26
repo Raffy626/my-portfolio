@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Plus, Edit, Trash2, LogOut, Upload, Link as LinkIcon, User } from "lucide-react";
 import Swal from 'sweetalert2';
-import { fetchAboutMe, createAboutMe, updateAboutMe, deleteAboutMe } from "../api";
+import { fetchAboutMe, createAboutMe, updateAboutMe, deleteAboutMe, fetchSkills, createSkill, updateSkill, deleteSkill } from "../api";
 
 export default function Admin() {
   const [activeTab, setActiveTab] = useState('projects');
@@ -18,7 +18,6 @@ export default function Admin() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  // About Me state
   const [aboutList, setAboutList] = useState([]);
   const [aboutForm, setAboutForm] = useState({
     name: "",
@@ -32,7 +31,16 @@ export default function Admin() {
   const [editingAbout, setEditingAbout] = useState(null);
   const [isAboutLoading, setIsAboutLoading] = useState(false);
 
-  // Fetch data
+  const [skills, setSkills] = useState([]);
+  const [skillForm, setSkillForm] = useState({
+    name: "",
+    level: 50,
+    icon: "",
+    category: ""
+  });
+  const [editingSkill, setEditingSkill] = useState(null);
+  const [isSkillLoading, setIsSkillLoading] = useState(false);
+
   const fetchPortfolios = async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/portfolios");
@@ -49,7 +57,6 @@ export default function Admin() {
     }
   };
 
-  // Fetch About Me data
   const fetchAbout = async () => {
     try {
       const data = await fetchAboutMe();
@@ -59,12 +66,21 @@ export default function Admin() {
     }
   };
 
+  const fetchSkillsData = async () => {
+    try {
+      const data = await fetchSkills();
+      setSkills(data);
+    } catch (err) {
+      console.error("Error fetching skills:", err);
+    }
+  };
+
   useEffect(() => {
     fetchPortfolios();
     fetchAbout();
+    fetchSkillsData();
   }, []);
 
-  // Handle form change
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "image") {
@@ -74,7 +90,6 @@ export default function Admin() {
     }
   };
 
-  // Submit add / update
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -311,6 +326,101 @@ export default function Admin() {
     });
   };
 
+  // Skills functions
+  const handleSkillSubmit = async (e) => {
+    e.preventDefault();
+    setIsSkillLoading(true);
+    try {
+      if (editingSkill) {
+        await updateSkill(editingSkill._id, skillForm);
+        Swal.fire({
+          title: "Success",
+          text: "Skill updated!",
+          icon: "success",
+          background: "#1a1a1a",
+          color: "#e6e6e6",
+        });
+      } else {
+        await createSkill(skillForm);
+        Swal.fire({
+          title: "Success",
+          text: "Skill added!",
+          icon: "success",
+          background: "#1a1a1a",
+          color: "#e6e6e6",
+        });
+      }
+
+      setSkillForm({
+        name: "",
+        level: 50,
+        icon: "",
+        category: ""
+      });
+      setEditingSkill(null);
+      fetchSkillsData();
+    } catch (err) {
+      console.error("Error submit skill:", err);
+      Swal.fire({
+        title: "Error",
+        text: "Failed to add/update Skill",
+        icon: "error",
+        background: "#1a1a1a",
+        color: "#e6e6e6",
+      });
+    } finally {
+      setIsSkillLoading(false);
+    }
+  };
+
+  const handleSkillEdit = (skill) => {
+    setSkillForm({
+      name: skill.name,
+      level: skill.level,
+      icon: skill.icon,
+      category: skill.category
+    });
+    setEditingSkill(skill);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleSkillDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#ef4444",
+      cancelButtonColor: "#6b7280",
+      confirmButtonText: "Yes, delete it!",
+      background: "#1a1a1a",
+      color: "#e6e6e6",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteSkill(id);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Skill has been deleted.",
+            icon: "success",
+            background: "#1a1a1a",
+            color: "#e6e6e6",
+          });
+          fetchSkillsData();
+        } catch (err) {
+          console.error("Error delete skill:", err);
+          Swal.fire({
+            title: "Error",
+            text: "Failed to delete Skill",
+            icon: "error",
+            background: "#1a1a1a",
+            color: "#e6e6e6",
+          });
+        }
+      }
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
       <div className="container mx-auto px-6 py-8">
@@ -359,6 +469,16 @@ export default function Admin() {
             }`}
           >
             About Me
+          </button>
+          <button
+            onClick={() => setActiveTab('skills')}
+            className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+              activeTab === 'skills'
+                ? 'bg-indigo-600 text-white'
+                : 'text-gray-400 hover:text-white hover:bg-gray-700'
+            }`}
+          >
+            Skills
           </button>
         </div>
 
@@ -625,6 +745,115 @@ export default function Admin() {
           </>
         )}
 
+        {/* Skills Tab */}
+        {activeTab === 'skills' && (
+          <>
+            {/* Skills Form */}
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 mb-8 border border-gray-700">
+              <h2 className="text-2xl font-semibold mb-6 flex items-center">
+                <Plus className="w-6 h-6 mr-2 text-indigo-400" />
+                {editingSkill ? "Edit Skill" : "Add New Skill"}
+              </h2>
+
+              <form onSubmit={handleSkillSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Skill Name</label>
+                    <input
+                      type="text"
+                      placeholder="Enter skill name"
+                      value={skillForm.name}
+                      onChange={(e) => setSkillForm({...skillForm, name: e.target.value})}
+                      className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-2">Category</label>
+                    <select
+                      value={skillForm.category}
+                      onChange={(e) => setSkillForm({...skillForm, category: e.target.value})}
+                      className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                      required
+                    >
+                      <option value="">Select category</option>
+                      <option value="frontend">Frontend</option>
+                      <option value="backend">Backend</option>
+                      <option value="mobile">Mobile</option>
+                      <option value="design">Design</option>
+                      <option value="tools">Tools</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Icon (Lucide icon name)</label>
+                  <input
+                    type="text"
+                    placeholder="e.g., Code, Palette, Smartphone"
+                    value={skillForm.icon}
+                    onChange={(e) => setSkillForm({...skillForm, icon: e.target.value})}
+                    className="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-300 mb-2">Skill Level ({skillForm.level}%)</label>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={skillForm.level}
+                    onChange={(e) => setSkillForm({...skillForm, level: parseInt(e.target.value)})}
+                    className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+                  />
+                  <div className="flex justify-between text-xs text-gray-400 mt-1">
+                    <span>Beginner</span>
+                    <span>Intermediate</span>
+                    <span>Expert</span>
+                  </div>
+                </div>
+
+                <div className="flex gap-4">
+                  <button
+                    type="submit"
+                    disabled={isSkillLoading}
+                    className="flex items-center bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-600 text-white px-6 py-3 rounded-lg transition-colors duration-200 font-medium"
+                  >
+                    {isSkillLoading ? (
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                    ) : (
+                      <Plus className="w-5 h-5 mr-2" />
+                    )}
+                    {editingSkill ? "Update Skill" : "Add Skill"}
+                  </button>
+
+                  {editingSkill && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSkillForm({
+                          name: "",
+                          level: 50,
+                          icon: "",
+                          category: ""
+                        });
+                        setEditingSkill(null);
+                      }}
+                      className="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors duration-200"
+                    >
+                      Cancel
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
+          </>
+        )}
+
         {/* Projects Tab Content */}
         {activeTab === 'projects' && (
           <div>
@@ -757,6 +986,70 @@ export default function Admin() {
                           <p className="text-gray-400 mt-1">{about.internshipDescription}</p>
                         </div>
                       )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Skills Tab Content */}
+        {activeTab === 'skills' && (
+          <div>
+            <h2 className="text-2xl font-semibold mb-6">Skills ({skills.length})</h2>
+
+            {skills.length === 0 ? (
+              <div className="text-center py-12">
+                <div className="text-gray-400 text-lg">No skills yet</div>
+                <p className="text-gray-500 mt-2">Add your skills above</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {skills.map((skill) => (
+                  <div
+                    key={skill._id}
+                    className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 hover:border-indigo-500 transition-all duration-300"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-indigo-500/20 rounded-lg flex items-center justify-center mr-3">
+                          <span className="text-indigo-400 text-lg">{skill.icon}</span>
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold text-white">{skill.name}</h3>
+                          <p className="text-indigo-400 text-sm capitalize">{skill.category}</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleSkillEdit(skill)}
+                          className="flex items-center bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-2 rounded-lg transition-colors duration-200 text-sm"
+                        >
+                          <Edit className="w-4 h-4 mr-1" />
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleSkillDelete(skill._id)}
+                          className="flex items-center bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg transition-colors duration-200 text-sm"
+                        >
+                          <Trash2 className="w-4 h-4 mr-1" />
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-gray-400">Level</span>
+                        <span className="text-white font-medium">{skill.level}%</span>
+                      </div>
+                      <div className="w-full bg-gray-700 rounded-full h-2">
+                        <div
+                          className="bg-indigo-500 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${skill.level}%` }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 ))}
