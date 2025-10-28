@@ -18,7 +18,8 @@ export default function PortfolioList() {
 
   return (
     <div className="py-10 px-6 bg-gray-950 text-white" data-aos="fade-in">
-      <h2 className="text-2xl font-bold mb-6" data-aos="fade-up">My Portfolios</h2>
+      <h2 className="text-2xl font-bold mb-4" data-aos="fade-up">My Portfolios</h2>
+      <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-6"></div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
         {portfolios.map((p, index) => (
           <div key={p._id} className="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300" data-aos="zoom-in-up" data-aos-delay={300 + index * 100}>

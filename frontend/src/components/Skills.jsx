@@ -47,7 +47,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-20 px-6 bg-gray-950 text-white relative overflow-hidden" data-aos="fade-in">
       <motion.h2
-        className="text-4xl md:text-5xl font-extrabold text-center mb-16 text-white"
+        className="text-4xl md:text-5xl font-extrabold text-center mb-4 text-white"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -55,6 +55,7 @@ export default function Skills() {
       >
         My Skills
       </motion.h2>
+      <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-16"></div>
 
       {loading ? (
         <div className="text-center py-20">

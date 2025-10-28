@@ -23,13 +23,14 @@ export default function PortfolioList() {
       className="px-6 py-16 bg-grid text-white relative overflow-hidden"
     >
       <motion.h1
-        className="text-4xl md:text-5xl font-extrabold mb-12 text-center text-white"
+        className="text-4xl md:text-5xl font-extrabold mb-4 text-center text-white"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
         My Projects
       </motion.h1>
+      <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto rounded-full mb-12"></div>
 
       <motion.div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto"
