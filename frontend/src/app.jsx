@@ -56,11 +56,6 @@ function App() {
           />
         </Routes>
       </div>
-      <img
-  src="/animation-unscreen.gif"
-  alt="Animated Sticker"
-  className="fixed bottom-6 right-6 w-20 h-20 object-contain z-50 select-none pointer-events-none"
-/>
     </Router>
   );
 }
